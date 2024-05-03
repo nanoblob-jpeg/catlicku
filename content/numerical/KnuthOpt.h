@@ -3,12 +3,12 @@
  * Date: 2020-02-29
  * License: NA
  * Source: robert1003.github.io
- * Description: Optimizes dp of the form dp_j = min_{0\le i < j} f(i, j)
- * where f(i, j) is usually dp_i + cost(i+1, j)/cost(i, j).
- * For a < b \le c < d
- * Monge Condition: Convex(f(a, c)+f(b, d) \le f(a, d) + f(b, c))
- * Totally Monotone: Convex(f(a, c)\ge f(b, c) implies f(a, d) \ge f(b, d))
- * For Concave flip \le to \ge and vice versa. Monge implies totally monotone
+ * Description: Optimizes dp of the form dp[j] = min(0<= i < j) f(i, j)
+ * where f(i, j) is usually dp[i] + cost(i+1, j)/cost(i, j).
+ * For a < b <= c < d
+ * Monge Condition: Convex(f(a, c)+f(b, d) <= f(a, d) + f(b, c))
+ * Totally Monotone: Convex(f(a, c) >= f(b, c) implies f(a, d) >= f(b, d))
+ * For Concave flip <= to >= and vice versa. Monge implies totally monotone
  * Time: O(Nlog(N))
  */
 #pragma once

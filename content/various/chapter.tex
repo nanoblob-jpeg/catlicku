@@ -34,8 +34,8 @@
 	\subsection{Pragmas}
 		\begin{itemize}
 			\item \lstinline{#pragma GCC optimize ("Ofast")} will make GCC auto-vectorize loops and optimizes floating points better.
+			\item \lstinline{#pragma GCC optimize ("unroll-loops")} reduces # of branches and optimizes parallel computation, but increased code size => instruction cache misses.
 			\item \lstinline{#pragma GCC target ("avx2")} can double performance of vectorized code, but causes crashes on old machines.
-			\item \lstinline{#pragma GCC optimize ("trapv")} kills the program on integer overflows (but is really slow).
 		\end{itemize}
 	\kactlimport{FastMod.h}
 	\kactlimport{FastInput.h}

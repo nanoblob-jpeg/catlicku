@@ -2,8 +2,8 @@
  * Author: Jerry Li
  * Date: 2024-04-01
  * License: NA
- * Description: Counts # elements in range equal to q, kth smallest, or range count. All indicies are 0 indexed and inclusive on both ides
- * Time: Operations are $O(\log \alpha)$.
+ * Description: Counts num elements in range equal to q, kth smallest, or range count. All indicies are 0 indexed and inclusive on both ides
+ * Time: Operations are O(log alpha).
  * Status: Stress-tested
  */
 #pragma once

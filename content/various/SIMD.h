@@ -14,10 +14,8 @@
 
 #pragma GCC target ("avx2") // or sse4.1
 #include "immintrin.h" /** keep-include */
-
 typedef __m256i mi;
 #define L(x) _mm256_loadu_si256((mi*)&(x))
-
 // High-level/specific methods:
 // load(u)?_si256, store(u)?_si256, setzero_si256, _mm_malloc
 // blendv_(epi8|ps|pd) (z?y:x), movemask_epi8 (hibits of bytes)
@@ -33,14 +31,12 @@ typedef __m256i mi;
 // Methods that work with most data types (append e.g. _epi32):
 // set1, blend (i8?x:y), add, adds (sat.), mullo, sub, and/or,
 // andnot, abs, min, max, sign(1,x), cmp(gt|eq), unpack(lo|hi)
-
 int sumi32(mi m) { union {int v[8]; mi m;} u; u.m = m;
 	int ret = 0; rep(i,0,8) ret += u.v[i]; return ret; }
 mi zero() { return _mm256_setzero_si256(); }
 mi one() { return _mm256_set1_epi32(-1); }
 bool all_zero(mi m) { return _mm256_testz_si256(m, m); }
 bool all_one(mi m) { return _mm256_testc_si256(m, one()); }
-
 ll example_filteredDotProduct(int n, short* a, short* b) {
 	int i = 0; ll r = 0;
 	mi zero = _mm256_setzero_si256(), acc = zero;

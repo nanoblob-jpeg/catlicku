@@ -29,7 +29,8 @@ function M.yank_snippet(snippet_name)
   local header_files = find_header_files(content_path)
 
   for _, file in ipairs(header_files) do
-    if file:match(snippet_name) then
+    local file_name = file:match("^.+/(.+)$")
+    if file_name == snippet_name .. ".h" then
       yank_file_content(file)
       print("Yanked content from " .. file)
       return

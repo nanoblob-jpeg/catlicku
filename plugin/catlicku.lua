@@ -24,9 +24,20 @@ local function yank_file_content(file)
 end
 
 function M.yank_snippet(snippet_name)
-  local base_path = vim.fn.stdpath('data') .. '/lazy/catlicku/content'
-  local content_path = vim.fn.resolve(base_path)
-  local header_files = find_header_files(content_path)
+  local base_path = ""
+  for _, path in ipairs(vim.api.nvim_list_runtime_paths()) do
+    if path:match("catlicku") then
+      base_path = path .. "/content"
+      break
+    end
+  end
+
+  if base_path == "" then
+    print("Plugin directory not found")
+    return
+  end
+
+  local header_files = find_header_files(base_path)
 
   for _, file in ipairs(header_files) do
     local file_name = file:match("^.+/(.+)$")

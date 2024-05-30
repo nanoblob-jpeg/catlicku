@@ -17,6 +17,8 @@ Install `nanoblob-jpeg/catlicku` with your favorite package manager e.g.
 
 Then use `:Uci <snippet name>` to yank code, for example `:Uci SegmentTree`
 
+Snippet names correspond to the trd, and can be listed with `:Ucilist`
+
 ## Aspirations
 
 KACTL algorithms should be: useful, short, fast enough, well tested, and if relevant, readable and easy to modify.

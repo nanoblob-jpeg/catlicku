@@ -3,10 +3,10 @@
  * Date: 2024-04-08
  * License: N/A
  * Source: https://usaco.guide/plat/centroid?lang=cpp
- * Description: $O(\log(n))$ depth.
+ * Description: $O(\log(n))$ depth. Builds into cent.
  * $\text{path}(u, v) = \text{path}(u, w) + \text{path}(w, v)$
  * , $w = \text{lca}(u, v)$ in centroid decomposition.
- * Usage: \texttt{initialize adj; build(root);}
+ * Usage: \texttt{initialize adj/cent; build(cent,root);}
  * Time: $O(n \log n)$
  */
 
@@ -27,11 +27,11 @@ int get_c(int c, int n, int p = -1) {
     }
     return c;
 }
-void build(int c = 0) {
-    int centroid = get_c(c, dfs_s(c));
-    // do something
-    rem[centroid] = true;
+int build(vector<vi> &cent, int c = 0) {
+    int cen = get_c(c, dfs_s(c)); // do something
+    rem[cen] = true;
     for (int ch: adj[centroid]) {
-        if (not rem[ch]) build(ch);
+        if(not rem[ch])cent[cen].push_back(build(cent, ch));
     }
+    return cen;
 }

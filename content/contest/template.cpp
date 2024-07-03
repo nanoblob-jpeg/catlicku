@@ -8,7 +8,7 @@ typedef int uci;
 #define F first
 #define S second
 #define rep(i, a, b) for(int i = a; i < (b); ++i)
-#define irep(i, a, b) for(int i = a; i >= (b); --i)
+#define irep(i, a, b) for(int i = a; i > (b); --i)
 #define all(x) begin(x), end(x)
 #define sz(x) (int)(x).size()
 typedef pair<int, int> pii;

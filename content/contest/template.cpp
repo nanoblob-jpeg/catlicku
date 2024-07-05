@@ -12,7 +12,9 @@ typedef int uci;
 #define all(x) begin(x), end(x)
 #define sz(x) (int)(x).size()
 typedef pair<int, int> pii;
-typedef vector<int> vi;
+#define ve vector
+typedef ve<int> vi;
+typedef ve<vi> vvi;
 
 uci main() {
     cin.tie(0)->sync_with_stdio(0); solve();

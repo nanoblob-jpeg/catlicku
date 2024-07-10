@@ -4,7 +4,7 @@
  * License: CC0
  * Source: own work
  * Description: Container where you can add lines of the form kx+m, and query maximum values at points x.
- *  Useful for dynamic programming (``convex hull trick''). For min, change to k > o.k
+ *  Useful for dynamic programming (``convex hull trick''). For min, use comments
  * Time: O(\log N)
  * Status: stress-tested
  */
@@ -12,7 +12,7 @@
 
 struct Line {
 	mutable ll k, m, p;
-	bool operator<(const Line& o) const { return k < o.k; }
+	bool operator<(const Line& o)const{return k </*>*/ o.k;}
 	bool operator<(ll x) const { return p < x; }
 };
 
@@ -23,7 +23,7 @@ struct LineContainer : multiset<Line, less<>> {
 		return a / b - ((a ^ b) < 0 && a % b); }
 	bool isect(iterator x, iterator y) {
 		if (y == end()) return x->p = inf, 0;
-		if (x->k == y->k) x->p = x->m > y->m ? inf : -inf;
+		if (x->k==y->k) x->p=x->m >/*<*/ y->m ? inf : -inf;
 		else x->p = div(y->m - x->m, x->k - y->k);
 		return x->p >= y->p;
 	}

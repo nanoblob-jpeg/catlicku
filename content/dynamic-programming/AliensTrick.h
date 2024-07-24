@@ -26,6 +26,7 @@
  * convex(general <=k), concave(general <=k) tested on:
  * https://www.acmicpc.net/problem/17439
  * */
+#pragma once
 
 int n, k; // global
 pii best(int lambda) { }

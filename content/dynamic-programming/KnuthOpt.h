@@ -5,16 +5,16 @@
  * Source: robert1003.github.io
  * Description: Solves $dp[j] = \min_{0 \leq i < j} (dp[i] + c(i+1, j))$
  * $c(i, j)$ must satisfy Quadrangle Inequality:
- * Convex($c(b, d) - c(b, c) \leq c(a, d) - c(a, c)$) for all $a \leq b \leq c \leq d$.
- * For Concave flip $\leq$ to $\geq$.
+ * convex($c(b, d) - c(b, c) \leq c(a, d) - c(a, c)$) for all $a \leq b \leq c \leq d$.
+ * For concave flip $\leq$ to $\geq$.
  * To use, fill out \texttt{c, f, T}.
  * Time: O(N \log N)
- * Status: Tested Convex on https://www.acmicpc.net/problem/17439.
+ * Status: Tested convex on https://www.acmicpc.net/problem/17439.
  */
 #pragma once
 
 struct Transition { int i, l, r; };
-T knuthConvex(int n) {
+T knuth_convex(int n) {
   ve<T> dp(n+1);
   auto c = [&](int l, int r) -> ll {};  // 1 <= l <= r <= n
   auto f = [&](int i, int j) -> T {return dp[i] + c(i+1, j);};
@@ -37,7 +37,7 @@ T knuthConvex(int n) {
   }
   return dp[n];
 }
-T knuthConcave(int n) {
+T knuth_concave(int n) {
   ve<T> dp(n+1);
   auto c = [&](int l, int r) -> ll {};  // 1 <= l <= r <= n
   auto f = [&](int i, int j) -> T {return dp[i] + c(i+1, j);};

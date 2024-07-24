@@ -9,7 +9,6 @@
 int knuth_array_partition(int n, int m, F f){
   // dp[index][partition number]
   // f(i, j, k) = cost of [i, j] as the kth partition
-  //      i and j are 0 indexed, k is 1 indexed
   vvi dp(n+1, vi(m+1, LINF)), opt(n+1, vi(m+1, n));
   dp[0][0] = opt[0][0] = 0;
   irep(i, n, 0) opt[i][1] = 0, dp[i][1] = f(0, i-1, 1);
@@ -22,7 +21,6 @@ int knuth_array_partition(int n, int m, F f){
 int knuth_array_merging(int n, F f){
   // dp[left bound][right bound], inclusive on both sides
   // f(i, j) calls to determine cost of [i, j]
-  //      i and j are 0 indexed
   vvi dp(n, vi(n, LINF)), opt(n, vi(n));
   rep(i, 0, n) dp[i][i] = f(i, i), opt[i][i] = i;
   irep(i, n-1, -1) rep(j, i+1, n)

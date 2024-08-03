@@ -18,7 +18,7 @@ int knuth_array_partition(int n, int m, F f){
   dp[0][0] = opt[0][0] = 0;
   irep(i, n, 0) opt[i][1] = 0, dp[i][1] = f(0, i-1, 1);
   rep(j, 2, m+1) irep(i, n, 0)
-    rep(k,opt[i][j-1],i==n?n+1:min(n+1, opt[i+1][j]+1))
+    rep(k,opt[i][j-1],i==n?n+1:min(i+1, opt[i+1][j]+1))
       if(dp[i][j] >= dp[k][j-1] + f(k, i-1, j))
         dp[i][j]=dp[k][j-1]+f(k, i-1, j), opt[i][j] = k;
   return dp.back().back();

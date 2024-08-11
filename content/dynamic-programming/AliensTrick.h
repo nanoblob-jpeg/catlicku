@@ -7,17 +7,17 @@
  * For problems asking for $\min$/$\max$ cost using $k$ or $\leq k$ 'groups'.
  * Replaces the groups state of the DP with a binary search.
  * Let $f(x)$ be the best cost using $x$ groups. $f(x)$ must be convex/concave.
- * Ensure $\max(|f(x) - f(x-1)|) \leq \max(|l|, |r|)$: almost guaranteed for \texttt{gen_eq=0}.
- * \texttt{gen_eq=0} is:
+ * Ensure $\max(\|f(x) - f(x-1)\|) \leq \max(\|l\|, \|r\|)$: almost guaranteed for \texttt{gen\_eq=0}.
+ * \texttt{gen\_eq=0} is:
  * convex(nonincreasing $=k$ / general $\leq k$),
  * concave(nondecreasing $=k$ / general $\leq k$).
- * \texttt{gen_eq=1} is: convex/concave(general $=k$).
+ * \texttt{gen\_eq=1} is: convex/concave(general $=k$).
  * Fill out \texttt{best}: add \texttt{+ lambda} extra cost for each group
  * and return $\min \{\text{cost}, \text{groups}\}$ for convex, $\max$ for concave.
- * If \texttt{gen_eq=1} and $n \cdot \max(|f(x)-f(x-1)|) > 4 \cdot 10^{18}$,
- * remove \textt{/n} + use \texttt{__int128} cost.
+ * If \texttt{gen\_eq=1} and $n \cdot \max(\|f(x)-f(x-1)\|) > 4 \cdot 10^{18}$,
+ * remove \texttt{/n} + use \texttt{\_\_int128} cost.
  * Time:
- * O(\log(10^{18}) / N)
+ * $O(\log(10^{18}) / N)$
  * Status:
  * convex(nonincreasing =k), concave(nondecreasing =k) tested on:
  * https://www.acmicpc.net/problem/12766

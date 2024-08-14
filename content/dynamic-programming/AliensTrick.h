@@ -12,7 +12,7 @@
  * convex(nonincreasing $=k$ / general $\leq k$),
  * concave(nondecreasing $=k$ / general $\leq k$).
  * \texttt{gen\_eq=1} is: convex/concave(general $=k$).
- * Fill out \texttt{best}: add \texttt{+ lambda} extra cost for each group
+ * Fill out \texttt{best}: add \texttt{+lambda} extra cost for each group
  * and return $\min \{\text{cost}, \text{groups}\}$ for convex, $\max$ for concave.
  * If \texttt{gen\_eq=1} and $n \cdot \max(\|f(x)-f(x-1)\|) > 4 \cdot 10^{18}$,
  * remove \texttt{/n} + use \texttt{\_\_int128} cost.

@@ -2,7 +2,7 @@
 using namespace std;
 
 #define ar array
-#define ll long long
+typedef long long ll;
 typedef int uci;
 #define int long long
 #define F first

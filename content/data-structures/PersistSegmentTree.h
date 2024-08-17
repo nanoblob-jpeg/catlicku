@@ -17,6 +17,10 @@ struct Node{
   Node()=delete;
   Node(int a,int b,int c=iv,int d=pv,Node*nl=0, Node*nr=0){
     l = nl,r = nr,val = c,prop = d,le = a,ri = b;}
+  void push(int mid){
+    l=l->update(prop,le,mid);r=r->update(prop,mid+1,ri);
+    val = l->val+r->val; prop = pv;
+  }
   Node* update(int amt, int lq, int rq){
     if(le > ri || lq > ri || rq < le) return this;
     else if(lq <= le && ri <= rq)
@@ -25,9 +29,7 @@ struct Node{
       int mid = le + (ri-le)/2;
       if(!l) l = new Node(le, mid);
       if(!r) r = new Node(mid+1, ri);
-      if(prop != pv){
-        l=l->update(prop,le,mid);r=r->update(prop,mid+1,ri);
-        val = l->val+r->val; prop = pv;}
+      if(prop != pv) push(mid);
       Node*nl=l->update(amt,lq,rq),*nr=r->update(amt,lq,rq);
       return new Node(le, ri, nl->val+nr->val, pv, nl, nr);
   } }
@@ -38,15 +40,11 @@ struct Node{
       int mid = le + (ri-le)/2;
       if(!l) l = new Node(le, mid);
       if(!r) r = new Node(mid+1, ri);
-      if(prop != pv){
-        l=l->update(prop,le,mid);r=r->update(prop,mid+1,ri);
-        val = l->val+r->val; prop = pv;
-      }
+      if(prop != pv) push(mid);
       return l->query(lq, rq) + r->query(lq, rq);
   } }
 };
 Node* build(vi &a, int l, int r){
-    if(l > r) return nullptr;
     if(l == r) return new Node(l, l, a[l]);
     int mid = l + (r-l)/2;
     Node*nl = build(a, l, mid), *nr = build(a, mid+1, r);

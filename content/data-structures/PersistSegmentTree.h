@@ -17,30 +17,28 @@ struct Node{
   Node()=delete;
   Node(int a,int b,int c=iv,int d=pv,Node*nl=0, Node*nr=0){
     l = nl,r = nr,val = c,prop = d,le = a,ri = b;}
-  void push(int mid){
-    l=l->update(prop,le,mid);r=r->update(prop,mid+1,ri);
-    val = l->val+r->val; prop = pv;
+  void push(){
+    int mid = le + (ri-le)/2;
+    if(!l)l = new Node(le, mid), r = new Node(mid+1, ri);
+    if(prop != pv){
+      l=l->update(prop,le,mid);r=r->update(prop,mid+1,ri);
+      val = l->val+r->val; prop = pv;
+    }
   }
   Node* update(int amt, int lq, int rq){
-    if(le > ri || lq > ri || rq < le) return this;
+    if(lq > ri || rq < le) return this;
     else if(lq <= le && ri <= rq)
       return new Node(le, ri, val+amt*(ri-le+1), prop+amt, l, r);
     else{
-      int mid = le + (ri-le)/2;
-      if(!l) l = new Node(le, mid);
-      if(!r) r = new Node(mid+1, ri);
-      if(prop != pv) push(mid);
+      push();
       Node*nl=l->update(amt,lq,rq),*nr=r->update(amt,lq,rq);
       return new Node(le, ri, nl->val+nr->val, pv, nl, nr);
   } }
   int query(int lq, int rq){
-    if(le > ri || lq > ri || rq < le) return iv;
+    if(lq > ri || rq < le) return iv;
     else if(lq <= le && ri <= rq) return val;
     else{
-      int mid = le + (ri-le)/2;
-      if(!l) l = new Node(le, mid);
-      if(!r) r = new Node(mid+1, ri);
-      if(prop != pv) push(mid);
+      push();
       return l->query(lq, rq) + r->query(lq, rq);
   } }
 };

@@ -50,5 +50,5 @@ Node* build(vi &a, int l, int r){
     if(l == r) return new Node(l, l, a[l]);
     int mid = l + (r-l)/2;
     Node*nl = build(a, l, mid), *nr = build(a, mid+1, r);
-    return new Node(l, r, nl->val+nr->val);
+    return new Node(l, r, nl->val+nr->val, pv, nl, nr);
 }

@@ -6,6 +6,7 @@
  * Description: Persistent, Implicit, and Lazy segment tree. Bounds are inclusive on BOTH sides: [lq, rq].
  * Function can be modified (e.g. max). iv is the default value, ip is default prop value. 
  * Time: O(\log N).
+ * High constant factor: 1e5 ops = (200ms, 300MB). Use bump allocator to 2x speed.
  * Usage: Node* tr = new Node(0, sz(v)-1); or Node* tr = build(v, 0, sz(v)-1);
  * Status:
  * Tested on: 

@@ -3,48 +3,47 @@
  * Date: 2024-08-16
  * License: CC0
  * Source: me
- * Description: Persistent segment tree with ability to add values of large intervals, and compute sum of intervals.
- * Can be changed to other things. iv is the default value, pv is default prop value. 
+ * Description: Persistent, Implicit, and Lazy segment tree. Bounds are inclusive on BOTH sides: [lq, rq].
+ * Function can be modified (e.g. max). iv is the default value, ip is default prop value. 
  * Time: O(\log N).
  * Usage: Node* tr = new Node(0, sz(v)-1); or Node* tr = build(v, 0, sz(v)-1);
- * Status: stress-tested a bit
+ * Status:
+ * Tested on: 
+ * 1. https://cses.fi/problemset/task/1737/
+ *      code: https://cses.fi/paste/b41710a7ef34dcd49c362c/
+ * 2. https://atcoder.jp/contests/abc253/tasks/abc253_f
+ *      code: https://atcoder.jp/contests/abc253/submissions/56885117
  */
 #pragma once
 
-int iv = 0, pv = 0;
+int iv = 0, ip = 0;
 struct Node{
-  Node*l = 0, *r=0; int val, prop, le = 0, ri = -1;
-  Node()=delete;
-  Node(int a,int b,int c=iv,int d=pv,Node*nl=0, Node*nr=0){
-    l = nl,r = nr,val = c,prop = d,le = a,ri = b;}
+  Node *l, *r; int v, p=ip, le, ri;
+  Node(int le, int ri, int v=iv, int p=ip, Node*l=0, Node*r=0)
+    : l(l), r(r), v(v), p(p), le(le), ri(ri) {}
+  Node(Node *l, Node *r)
+    : l(l), r(r), v(l->v+r->v), le(l->le), ri(r->ri) {}
   void push(){
-    int mid = le + (ri-le)/2;
-    if(!l)l = new Node(le, mid), r = new Node(mid+1, ri);
-    if(prop != pv){
-      l=l->update(prop,le,mid);r=r->update(prop,mid+1,ri);
-      val = l->val+r->val; prop = pv;
-    }
+    int m = (le+ri)/2;
+    if(!l) l = new Node(le, m), r = new Node(m+1, ri);
+    if(p!=ip) l=l->update(le,m,p), r=r->update(m+1,ri,p), p=ip;
   }
-  Node* update(int amt, int lq, int rq){
+  Node* update(int lq, int rq, int x){ // [lq, rq]
     if(lq > ri || rq < le) return this;
-    else if(lq <= le && ri <= rq)
-      return new Node(le, ri, val+amt*(ri-le+1), prop+amt, l, r);
-    else{
-      push();
-      Node*nl=l->update(amt,lq,rq),*nr=r->update(amt,lq,rq);
-      return new Node(le, ri, nl->val+nr->val, pv, nl, nr);
-  } }
-  int query(int lq, int rq){
+    if(lq <= le && ri <= rq)
+      return new Node(le, ri, v+x*(ri-le+1), p+x, l, r);
+    push();
+    return new Node(l->update(lq,rq,x), r->update(lq,rq,x));
+  }
+  int query(int lq, int rq){ // [lq, rq]
     if(lq > ri || rq < le) return iv;
-    else if(lq <= le && ri <= rq) return val;
-    else{
-      push();
-      return l->query(lq, rq) + r->query(lq, rq);
-  } }
+    if(lq <= le && ri <= rq) return v;
+    push();
+    return l->query(lq, rq) + r->query(lq, rq);
+  }
 };
 Node* build(vi &a, int l, int r){
-    if(l == r) return new Node(l, l, a[l]);
-    int mid = l + (r-l)/2;
-    Node*nl = build(a, l, mid), *nr = build(a, mid+1, r);
-    return new Node(l, r, nl->val+nr->val, pv, nl, nr);
+  if(l == r) return new Node(l, l, a[l]);
+  int m = (l+r)/2;
+  return new Node(build(a, l, m), build(a, m+1, r));
 }

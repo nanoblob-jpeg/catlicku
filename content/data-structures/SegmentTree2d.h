@@ -3,8 +3,10 @@
  * Date: 2024-08-18
  * License: CC0
  * Source: me 
- * Description: Computes max a[xl,xr)[yl,yr) and sets elements a[x][y].
- * Requires that the elements to be updated are known in advance (call fakeUpdate() before init()).
+ * Description: 0-indexed sparse ($O(N\logN)$ memory) 2D segment tree.
+ * Computes max a[xl,xr)[yl,yr) and sets elements a[x][y]. 
+ * Offline: requires that the elements to be updated are known in advance.
+ * Before all "real" updates: \texttt{fakeUpdate(all updates); init();}.
  * High constant factor: 1e5 ops = (1s, 80MB).
  * Time: $O(\log^2 N)$.
  * Status:
@@ -19,7 +21,7 @@
 struct ST2 {
   int nx; ve<ve<pii>> pts; vector<ST> st;
   ST2(int nx) : nx(nx), pts(2*nx) {}
-  void fake_update(int x, int y) {
+  void fakeUpdate(int x, int y) {
     for (int i = x+nx; i; i /= 2)
       pts[i].push_back({y, x});
   }

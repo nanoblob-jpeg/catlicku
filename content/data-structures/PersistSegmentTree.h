@@ -3,11 +3,16 @@
  * Date: 2024-08-16
  * License: CC0
  * Source: me
- * Description: Persistent segment tree with ability to add values of large intervals, and compute sum of intervals.
- * Can be changed to other things. iv is the default value, pv is default prop value. 
+ * Description: Persistent, Implicit, and Lazy segment tree. Bounds are inclusive on BOTH sides: [lq, rq].
+ * Function can be modified (e.g. max). iv is the default value, ip is default prop value. 
  * Time: O(\log N).
  * Usage: Node* tr = new Node(0, sz(v)-1); or Node* tr = build(v, 0, sz(v)-1);
- * Status: stress-tested a bit
+ * Status:
+ * Tested on: 
+ * 1. https://cses.fi/problemset/task/1737/
+ *      code: https://cses.fi/paste/b41710a7ef34dcd49c362c/
+ * 2. https://atcoder.jp/contests/abc253/tasks/abc253_f
+ *      code: https://atcoder.jp/contests/abc253/submissions/56885117
  */
 #pragma once
 
@@ -23,14 +28,14 @@ struct Node{
     if(!l) l = new Node(le, m), r = new Node(m+1, ri);
     if(p!=ip) l=l->update(le,m,p), r=r->update(m+1,ri,p), p=ip;
   }
-  Node* update(int lq, int rq, int x){
+  Node* update(int lq, int rq, int x){ // [lq, rq]
     if(lq > ri || rq < le) return this;
     if(lq <= le && ri <= rq)
       return new Node(le, ri, v+x*(ri-le+1), p+x, l, r);
     push();
     return new Node(l->update(lq,rq,x), r->update(lq,rq,x));
   }
-  int query(int lq, int rq){
+  int query(int lq, int rq){ // [lq, rq]
     if(lq > ri || rq < le) return iv;
     if(lq <= le && ri <= rq) return v;
     push();

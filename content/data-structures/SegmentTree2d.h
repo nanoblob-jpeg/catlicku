@@ -3,9 +3,9 @@
  * Date: 2024-08-18
  * License: CC0
  * Source: me 
- * Description: 0-indexed sparse ($O(N\logN)$ memory) 2D segment tree.
- * Computes max a[xl,xr)[yl,yr) and sets elements a[x][y]. 
- * Offline: requires that the elements to be updated are known in advance.
+ * Description: 0-indexed sparse ($O(N\log N)$ memory) 2D segment tree.
+ * Computes max a[xl,xr)[yl,yr) and sets elements a[x][y].
+ * Offline requires that the elements to be updated are known in advance.
  * Before all "real" updates: \texttt{fakeUpdate(all updates); init();}.
  * High constant factor: 1e5 ops = (1s, 80MB).
  * Time: $O(\log^2 N)$.

@@ -1,67 +1,76 @@
 /**
- * Author: someone on Codeforces
- * Date: 2017-03-14
- * Source: folklore
+ * Author: Unknown
+ * Date: Unknown
+ * Source: https://cp-algorithms.com/data_structures/treap.html
  * Description: A short self-balancing tree. It acts as a
- *  sequential container with log-time splits/joins, and
- *  is easy to augment with additional data.
+ *  sequential container with log-time splits/merges. 
+ *  Can also insert, move and reverse ranges. Currently lazy.
+ *  Remove push() and uncomment "..new Node.." for just persistent.
+ *  For both, add \texttt{t->update(prop) {return new Node(t + prop)}} so push() creates new nodes.
  * Time: $O(\log N)$
- * Status: stress-tested
+ * Status: 
+ *  1. Stress-tested
+ *  2. https://cses.fi/problemset/task/2073/ (Lazy (Reverse), Insert)
+ *       Code: https://cses.fi/problemset/result/10278574/
+ *  3. https://cses.fi/problemset/task/2072/ (Move, Insert)
+ *       Code: 
+ *  4. https://atcoder.jp/contests/abc253/tasks/abc253_f (Persistent + Lazy)
+ *       Code: https://atcoder.jp/contests/abc253/submissions/56989219
  */
 #pragma once
 
+#define cnt(n) ((n) ? (n)->c : 0)
 struct Node {
-	Node *l = 0, *r = 0;
-	int val, y, c = 1;
-	Node(int val) : val(val), y(rand()) {}
-	void recalc();
+    Node *l = 0, *r = 0;
+    int v, y, c = 1, rev = 0;
+    Node(int v) : v(v), y(rand()) {}
+    Node(Node *a) { *this = *a; }
+
+    void pull() { c = cnt(l) + cnt(r) + 1; }
+    void push() {
+        if (rev) {
+            swap(l, r);
+            if (l) l->rev ^= 1; if (r) r->rev ^= 1;
+            rev = 0;
+        }
+    }
 };
-
-int cnt(Node* n) { return n ? n->c : 0; }
-void Node::recalc() { c = cnt(l) + cnt(r) + 1; }
-
-template<class F> void each(Node* n, F f) {
-	if (n) { each(n->l, f); f(n->val); each(n->r, f); }
+// l = [0, i), r = [i, n)
+void split(Node* t, Node*& l, Node*& r, int i) {
+    if (!t) { l = r = 0; return; }
+    t->push(); // t = new Node(t);
+    // Replace with comments for lower_bound(i)
+    if (i <= cnt(t->l)/*x->v*/) split(t->l, l, t->l, i), r = t;
+    else split(t->r, t->r, r, i - cnt(t->l) - 1 /*i*/), l = t;
+    t->pull();
 }
-
-pair<Node*, Node*> split(Node* n, int k) {
-	if (!n) return {};
-	if (cnt(n->l) >= k) { // "n->val >= k" for lower_bound(k)
-		auto pa = split(n->l, k);
-		n->l = pa.second;
-		n->recalc();
-		return {pa.first, n};
-	} else {
-		auto pa = split(n->r, k - cnt(n->l) - 1); // and just "k"
-		n->r = pa.first;
-		n->recalc();
-		return {n, pa.second};
-	}
+void merge(Node*& t, Node* l, Node* r) {
+    if (!l || !r) t = l ? l : r;
+    else if (l->y < r->y) {
+        r->push(); // r = new Node(r);
+        merge(r->l, l, r->l); t = r;
+    }
+    else {
+        l->push(); // l = new Node(l);
+        merge(l->r, l->r, r); t = l;
+    }
+    t->pull();
 }
-
-Node* merge(Node* l, Node* r) {
-	if (!l) return r;
-	if (!r) return l;
-	if (l->y > r->y) {
-		l->r = merge(l->r, r);
-		l->recalc();
-		return l;
-	} else {
-		r->l = merge(l, r->l);
-		r->recalc();
-		return r;
-	}
+void insert(Node*& t, Node* n, int i) { // (0 indexed)
+    Node *l, *r;
+    split(t, l, r, i), merge(l, l, n), merge(t, l, r);
 }
-
-Node* ins(Node* t, Node* n, int pos) {
-	auto pa = split(t, pos);
-	return merge(merge(pa.first, n), pa.second);
-}
-
-// Example application: move the range [l, r) to index k
+// Move [l, r] to index k (0 indexed)
 void move(Node*& t, int l, int r, int k) {
-	Node *a, *b, *c;
-	tie(a,b) = split(t, l); tie(b,c) = split(b, r - l);
-	if (k <= l) t = merge(ins(a, b, k), c);
-	else t = merge(a, ins(c, b, k - r));
+    Node *a, *b, *c;
+    split(t, a, c, r+1), split(a, a, b, l), merge(t, a, c);
+    if (k<=l) insert(t, b, k);
+    else insert(t, b, k - (r - l + 1) /*k*/);
+}
+// Reverse [l, r] (0 indexed)
+void rev(Node*& t, int l, int r) {
+    Node *a, *b, *c;
+    split(t, a, c, r+1), split(a, a, b, l);
+    b->rev ^= 1;
+    merge(a, a, b), merge(t, a, c);
 }

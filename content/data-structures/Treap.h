@@ -6,7 +6,8 @@
  *  sequential container with log-time splits/merges. 
  *  Can also insert, move and reverse ranges. Currently lazy.
  *  Remove push() and uncomment "..new Node.." for just persistent.
- *  For both, add \texttt{t->update(prop) {return new Node(t + prop)}} so push() creates new nodes.
+ *  For both, add method \texttt{t->update(prop) { return new Node(t + prop) }}
+ *  and use it to make push() create new nodes.
  *  1e5 (move/reverse) = 150ms. 1e5 (split/merge) = 25ms.
  * Time: $O(\log N)$
  * Status: 
@@ -26,13 +27,10 @@ struct Node {
     int v, y, c = 1, rev = 0;
     Node(int v) : v(v), y(rand()) {}
     Node(Node *a) { *this = *a; }
-
     void pull() { c = cnt(l) + cnt(r) + 1; }
-    void push() {
-        if (rev) {
-            swap(l, r);
-            if (l) l->rev ^= 1; if (r) r->rev ^= 1;
-            rev = 0;
+    void push() { 
+        if (rev) { swap(l, r);
+            if (l) l->rev ^= 1; if (r) r->rev ^= 1; rev = 0;
         }
     }
 };

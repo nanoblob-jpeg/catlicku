@@ -7,6 +7,7 @@
  *  Can also insert, move and reverse ranges. Currently lazy.
  *  Remove push() and uncomment "..new Node.." for just persistent.
  *  For both, add \texttt{t->update(prop) {return new Node(t + prop)}} so push() creates new nodes.
+ *  1e5 (move/reverse) = 150ms. 1e5 (split/merge) = 25ms.
  * Time: $O(\log N)$
  * Status: 
  *  1. Stress-tested

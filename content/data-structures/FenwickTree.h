@@ -3,8 +3,8 @@
  * Date: 2009-10-30
  * License: CC0
  * Source: folklore/TopCoder
- * Description: Computes partial sums a[0] + a[1] + ... + a[i - 1], and adds to a[i].
- * Time: Both operations are $O(\log N)$.
+ * Description: Computes partial sums a[0, i) and adds to single elements a[i].
+ * Time: $O(\log N)$.
  * Status: Stress-tested
  */
 #pragma once
@@ -20,7 +20,7 @@ struct FT {
 		for (; i > 0; i &= i - 1) res += s[i-1];
 		return res;
 	}
-	int lower_bound(ll x) { // min i st x of [0, i] >= x
+	int lower_bound(ll x) { // min i st sum of [0, i] >= x
 		// Returns n if no sum is >= x, or -1 if empty sum is.
 		if (x <= 0) return -1;
 		int i = 0;

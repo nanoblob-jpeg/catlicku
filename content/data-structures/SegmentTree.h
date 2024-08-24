@@ -3,9 +3,9 @@
  * Date: 2017-10-31
  * License: CC0
  * Source: folklore
- * Description: Zero-indexed max-tree. Bounds are inclusive to the left and exclusive to the right.
- * Can be changed by modifying \texttt{iv}, \texttt{f};
- * Low constant factor: 1e6 ops = 150ms, 2x faster than recursive.
+ * Description: Zero-indexed max-tree.
+ * Can be changed by modifying \texttt{iv}, \texttt{f}.
+ * Low constant factor: 1e6 ops = 150ms (2x faster than recursive).
  * Time: O(\log N)
  * Status: stress-tested
  */
@@ -17,7 +17,7 @@ int f(int a, int b) { return max(a, b); } // commutative
 struct ST {
   vector<int> s; int n;
   ST(int n = 0) : s(2*n, iv), n(n) {}
-  void update(int i, int v) {
+  void update(int i, int v) { // a[i] = v
     for (s[i += n] = v; i /= 2;)
       s[i] = f(s[i * 2], s[i * 2 + 1]);
   }

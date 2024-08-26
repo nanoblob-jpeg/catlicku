@@ -3,8 +3,11 @@
  * Date: 2017-05-11
  * License: CC0
  * Source: folklore
- * Description: Computes sums a[i,j] for all i<I, j<J, and increases single elements a[i,j].
- *  Requires that the elements to be updated are known in advance (call fakeUpdate() before init()).
+ * Description: 0-indexed sparse ($O(N\log N)$ memory) 2D fenwick tree.
+ * Computes sums a[i,j] for all i<I, j<J, and increases single elements a[i,j].
+ * Offline, so requires that the elements to be updated are known in advance.
+ * Before all "real" updates: \texttt{fakeUpdate(all updates); init();}.
+ * Low constant factor: 1e5 ops = (200ms, 35MB)
  * Time: $O(\log^2 N)$. (Use persistent segment trees for $O(\log N)$.)
  * Status: stress-tested
  */

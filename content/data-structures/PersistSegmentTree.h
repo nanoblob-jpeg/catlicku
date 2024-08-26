@@ -3,8 +3,11 @@
  * Date: 2024-08-16
  * License: CC0
  * Source: me
- * Description: Persistent, Implicit, and Lazy segment tree. Bounds are inclusive on BOTH sides: [lq, rq].
- * Function can be modified (e.g. max). iv is the default value, ip is default prop value. 
+ * Description: Persistent, Implicit, and Lazy segment tree.
+ * Can add to large intervals and compute sum of intervals.
+ * Can be modified (e.g. set + max). iv is the default value, ip is default prop value. 
+ * Bounds are inclusive on BOTH sides: [lq, rq].
+ * High constant factor: 1e5 ops = (200ms, 300MB). Use bump allocator to 2x speed.
  * Time: O(\log N).
  * Usage: Node* tr = new Node(0, sz(v)-1); or Node* tr = build(v, 0, sz(v)-1);
  * Status:

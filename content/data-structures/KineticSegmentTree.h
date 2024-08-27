@@ -1,6 +1,9 @@
 /**
  * Author: Unknown
  * Description: Kinetic Segment Tree, intervals are [l, r)
+ * To change min to max, only change the min in rec_get.
+ * Change all < to > in pull(). Lastly, change v1 to v2 and vice
+ * versa in the calculation of x.
  */
 
 const int INFX = 2e12, INFY = 2e18;
@@ -72,7 +75,7 @@ struct LazyKST {
     if (l >= vr || r <= vl) return INFY;
     if (l <= vl && r >= vr) return tree[v].b;
     int vm = (vl + vr) / 2; push(v);
-    min(rec_get(v*2,vl,vm,l,r),rec_get(v*2+1,vm,vr,l,r));
+    return min(rec_get(v*2,vl,vm,l,r),rec_get(v*2+1,vm,vr,l,r));
   }
   int get(int l, int r) {
     return rec_get(1, 0, n, l, r);

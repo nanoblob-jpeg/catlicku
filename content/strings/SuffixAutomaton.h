@@ -8,16 +8,14 @@
  */
 #pragma once
 
-struct suffixAutomaton {
+struct SuffixAutomaton {
   struct state {
     int len, link; map<char, int> next;
-    state() { len = link = 0; next.clear(); }
-  };
+    state() { len = link = 0; next.clear(); } };
   ve<state> st; int sz, last;
   void sa_init() {
     st.resize(1); st[0].len = 0;
-    st[0].link = -1; sz++; last = 0;
-  }
+    st[0].link = -1; sz++; last = 0; }
   void sa_extend(char c) {
     int cur = sz++; st.emplace_back();
     st[cur].len = st[last].len + 1; int p = last;
@@ -35,5 +33,4 @@ struct suffixAutomaton {
         st[q].link = st[cur].link = clone;
       }
     } last = cur;
-  }
-};
+  } };

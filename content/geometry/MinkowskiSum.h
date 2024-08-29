@@ -3,11 +3,10 @@
  * Date: 2024-07-30
  * License: CC0
  * Source: notebook el vasito
- * Description: Compute Minkowski sum of two strictly convex non empty polygons (i.e. two hulls).
- * Returns answer in CCW order.
- * The Minkowski sum of two polygons $$P$$ and $$Q$$ viewed as sets of $\mathbb{R}^2$ is defined as
- * $\{p + q : p \in P, q \in Q\}$
- * Time: O(n \log n + m \log m)
+ * Description: Computes Minkowski sum of two strictly convex polygons $P$, $Q$ (no collinear).
+ *  This is the ccw convex hull of $\{p + q : p \in P, q \in Q\}$.
+ *  If $P$, $Q$ have $\ge 3$ sides, remove first \texttt{if} and ConvexHull.h.
+ * Time: O(n + m) without if
  * Status: stress-tested
 */
 

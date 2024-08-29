@@ -2,8 +2,8 @@
  * Author: Czaj Nik
  * Date: ????
  * License: N/A
- * Description: set<int> implemented with bitsets.
- *  IntSet<(int)1e9> = 125MB. 20x faster than set<int> (50-200e6 ops = 1s).
+ * Description: \texttt{set<int>} implemented with bitsets.
+ *  \texttt{IntSet<(int)1e9>} = 125MB. 20x faster than \texttt{set<int>} (50-200e6 ops = 1s).
  * Status: Tested on yosupo judge
  */
 #pragma once

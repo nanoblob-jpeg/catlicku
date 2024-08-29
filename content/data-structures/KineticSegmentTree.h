@@ -1,7 +1,7 @@
 /**
  * Author: Unknown
  * Description: Kinetic Segment Tree, intervals are [l, r)
- * To change min to max, only change the min in rec_get.
+ * To change min to max, only change the min in rec\_get.
  * Change all < to > in pull(). Lastly, change v1 to v2 and vice
  * versa in the calculation of x.
  */

@@ -13,11 +13,11 @@
  * Status: 
  *  1. Stress-tested
  *  2. https://cses.fi/problemset/task/2073/ (Lazy (Reverse), Insert)
- *       Code: https://cses.fi/paste/9026fe796244a1bc9cd6ae/
+ *       Code at https://cses.fi/paste/9026fe796244a1bc9cd6ae/
  *  3. https://cses.fi/problemset/task/2072/ (Move, Insert)
- *       Code: https://cses.fi/paste/157de824bcf64e839cd6d6/
+ *       Code at https://cses.fi/paste/157de824bcf64e839cd6d6/
  *  4. https://atcoder.jp/contests/abc253/tasks/abc253_f (Persistent + Lazy)
- *       Code: https://atcoder.jp/contests/abc253/submissions/56989219
+ *       Code at https://atcoder.jp/contests/abc253/submissions/56989219
  */
 #pragma once
 

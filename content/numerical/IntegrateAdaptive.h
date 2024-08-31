@@ -4,6 +4,7 @@
  * License: CC0
  * Source: Wikipedia
  * Description: Fast integration using an adaptive Simpson's rule.
+ *  Make sure \texttt{(b-a)/eps} < 1e-13 due to double's precision.
  * Time: O((b-a) / \sqrt[4]{\epsilon})
  * Usage:
 	double sphereVolume = quad(-1, 1, [](double x) {

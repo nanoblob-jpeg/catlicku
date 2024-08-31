@@ -4,12 +4,14 @@
  * License: CC0
  * Source: Wikipedia
  * Description: Fast integration using an adaptive Simpson's rule.
+ * Time: O((b-a) / \sqrt[4]{\epsilon})
  * Usage:
 	double sphereVolume = quad(-1, 1, [](double x) {
 	return quad(-1, 1, [\&](double y) {
 	return quad(-1, 1, [\&](double z) {
 	return x*x + y*y + z*z < 1; });});});
- * Status: mostly untested
+ * Status: Tested on ICPC WF 2012 B.
+ *  Tested locally on 1, 2, 3 nested integrals for sphereVolume.
  */
 #pragma once
 

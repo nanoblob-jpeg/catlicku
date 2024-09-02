@@ -5,7 +5,7 @@
  * Source: thomas
  * Description:  For use in computing line-polygon intersection between some line s-e and polygon side p1-p2. 
  *               To use, apply this function to all polygon edges, sort outputs by first key and maintain running sum of second key. 
- *               Segments for which the running sum was nonzero are in the intersection.
+ *               Segments for which the running sum was nonzero are in the polygon.
  */
 vector<pair<P, ll>> linePoly(P s, P e, P p1, P p2) {
     ll s1 = sideOf(s,e,p1), s2 = sideOf(s,e,p2);

@@ -4,6 +4,8 @@
  * To change min to max, only change the min in rec\_get.
  * Change all < to > in pull(). Lastly, change v1 to v2 and vice
  * versa in the calculation of x.
+ * 2e5 ops is around 500 ms.
+ * Time: $O(\log^2N)$ for heaten, $O(\log N)$ for others
  */
 
 const int INFX = 2e12, INFY = 2e18;

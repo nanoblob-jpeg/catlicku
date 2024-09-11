@@ -16,6 +16,10 @@ typedef pair<int, int> pii;
 typedef ve<int> vi;
 typedef ve<vi> vvi;
 
+void solve() {
+
+}
+
 uci main() {
     cin.tie(0)->sync_with_stdio(0); solve();
 }

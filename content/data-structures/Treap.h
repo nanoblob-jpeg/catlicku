@@ -6,9 +6,9 @@
  *  sequential container with log-time splits/merges. 
  *  Can also insert, move and reverse ranges. Currently lazy.
  *  Remove push() and uncomment "..new Node.." for just persistent.
- *  For both, add method \texttt{t->update(prop) { return new Node(t + prop) }}
+ *  For both, add method \texttt{t->update(prop) \{ return new Node(t + prop) \}}
  *  and use it to make push() create new nodes.
- *  1e5 (move/reverse) = 150ms. 1e5 (split/merge) = 25ms. 1e5 (lazy+persistent) = (500ms, 600MB).
+ *  1e5 (split/merge) = 25ms. 1e5 (move/reverse) = 150ms. 1e5 (lazy+persistent) = (500ms, 600MB).
  * Time: $O(\log N)$
  * Status: 
  *  1. Stress-tested

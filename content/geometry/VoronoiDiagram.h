@@ -2,7 +2,7 @@
  * Author: Elijah Huang
  * Date: 2024-09-12
  * Source:
- * Description: Given points, returns $\text{map}[p]$ = {is\_inf, ccw voronoi\_region(p)} for each $p$ in points.
+ * Description: Given points, returns map[$p$] = \{is\_inf, ccw\_voronoi\_region($p$)\} for each $p$ in points.
  *  is\_inf=true if the region is infinite, in which case the two rays will have length \texttt{INF}.
  *  There must be no duplicate points and they should not be all collinear.
  * Time: O(n \log n)

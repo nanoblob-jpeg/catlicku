@@ -9,11 +9,9 @@
  */
 #pragma once
 
-// Either globally or in a single class:
-static char buf[450 << 20];
+static char buf[450 << 20];  // globally or in a single class:
 void* operator new(size_t s) {
 	static size_t i = sizeof buf;
 	assert(s < i);
 	return (void*)&buf[i -= s];
-}
-void operator delete(void*) {}
+} void operator delete(void*) {}

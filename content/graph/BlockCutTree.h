@@ -9,7 +9,7 @@
  *  \texttt{artp[i] == true} means $i$ is an articulation point.
  *  \texttt{id[i]} is the node $i$ is a part of in the block-cut tree.
  *  Let \texttt{nartp = accumulate(all(artp), 0)},
- *  then nodes $0 \dots \texttt{nartp-1}$ are articulation points.
+ *  then nodes \texttt{0...nartp-1} are articulation points.
  *  Can pass \texttt{artp, id} with any contents.
  * Time: $O(n)$.
  * Status: Tested on https://www.acmicpc.net/problem/15768

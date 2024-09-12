@@ -11,13 +11,10 @@
  * Time: $O((n+m) \cdot \log(n))$
  */
 
-const int N=0;
-vi adj[N];
+const int N=0; vi adj[N];
 vi dom_tree[N], rg[N], buc[N];
-int sdom[N], par[N], dom[N], dsu[N], lab[N];
-int ar[N], rev[N], T;
-
-int Find(int u,int x=0) {
+int sdom[N], par[N], dom[N], dsu[N], lab[N], ar[N], rev[N], T;
+int Find(int u, int x=0) {
     if (u == dsu[u]) return x ? -1 : u;
     int v = Find(dsu[u], x+1);
     if (v < 0) return u;
@@ -25,19 +22,14 @@ int Find(int u,int x=0) {
     dsu[u] = v;
     return x ? v : lab[u];
 }
-void Union(int u,int v) {
-    dsu[v] = u;
-}
-
+void Union(int u, int v) { dsu[v] = u; }
 void dfs0(int u) {
-    ar[u]=++T; rev[T]=u;
-    lab[T]=T; sdom[T]=T; dsu[T]=T;
+    ar[u]=++T; rev[T]=u; lab[T]=T; sdom[T]=T; dsu[T]=T;
     for (int w: adj[u]) {
         if (!ar[w]) dfs0(w), par[ar[w]]=ar[u];
         rg[ar[w]].push_back(ar[u]);
     }
 }
-
 void build() {
     dfs0(1);
     for (int i = T; i >= 1; i--) {

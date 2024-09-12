@@ -5,15 +5,18 @@
  * Description: Finds a minimum vertex cover in a bipartite graph.
  *  The size is the same as the size of a maximum matching, and
  *  the complement is a maximum independent set.
+ *  \texttt{n} and \texttt{m} are the sizes of the left and right partitions respectively.
+ *  Then graph \texttt{g} ($g[0] \dots g[n-1]$) contains the 
+ *  adjacent vertices in the right partition ($0 \dots m-1$).
  * Status: stress-tested
  */
 #pragma once
 
-#include "DFSMatching.h"
+#include "hopcroftKarp.h"
 
 vi cover(vector<vi>& g, int n, int m) {
 	vi match(m, -1);
-	int res = dfsMatching(g, match);
+	int res = hopcroftKarp(g, match);
 	vector<bool> lfound(n, true), seen(m);
 	for (int it : match) if (it != -1) lfound[it] = false;
 	vi q, cover;

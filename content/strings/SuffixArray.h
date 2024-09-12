@@ -11,7 +11,7 @@
  * The returned vector is of size $n+1$, and \texttt{sa[0] = n}.
  * The \texttt{alcp} array contains longest common prefixes for
  * neighbouring strings in the suffix array:
- * \texttt{alcp[i] = lcp(sa[i], sa[i-1])}, \texttt{alcp[0] = 0}.
+ * $\texttt{alcp[i]} = lcp(\texttt{sa[i]}, \texttt{sa[i-1]})$, \texttt{alcp[0] = 0}.
  * The input string must not contain any zero bytes.
  * Can remove RMQ.h if you don't need lcp().
  * Time: O(n \log n) to construct, O(1) for lcp.
@@ -23,6 +23,7 @@
 
 struct SuffixArray {
   vi sa, alcp, rsa;
+  RMQ<int> st;
   SuffixArray(string& s, int lim=256) { // or basic_string<int>
     int n = sz(s) + 1, k = 0, a, b;
     vi x(all(s)+1), y(n), ws(max(n, lim)), rank(n);

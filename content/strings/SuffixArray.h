@@ -26,8 +26,8 @@ struct SuffixArray {
   RMQ<int> st;
   SuffixArray(string& s, int lim=256) { // or basic_string<int>
     int n = sz(s) + 1, k = 0, a, b;
-    vi x(all(s)+1), y(n), ws(max(n, lim)), rank(n);
-    sa = alcp = y, iota(all(sa), 0);
+    vi x(all(s)), y(n), ws(max(n, lim)), rank(n);
+    x.push_back(0), sa = alcp = y, iota(all(sa), 0);
     for (int j = 0, p = 0; p < n; j = max(1, j * 2), lim = p) {
       p = j, iota(all(y), n - j);
       rep(i,0,n) if (sa[i] >= j) y[p++] = sa[i] - j;

@@ -12,7 +12,7 @@
 #pragma once
 
 int iv = INT_MIN;
-int f(int a, int b) { return max(a, b); } // commutative
+int f(int a, int b) { return max(a, b); } // associative
 
 struct ST {
   vector<int> s; int n;
@@ -22,11 +22,11 @@ struct ST {
       s[i] = f(s[i * 2], s[i * 2 + 1]);
   }
   int query(int b, int e) { // query [b, e)
-    int r = iv;
+    int r = iv, l = iv;
     for (b += n, e += n; b < e; b /= 2, e /= 2) {
-      if (b % 2) r = f(r, s[b++]);
+      if (b % 2) l = f(l, s[b++]);
       if (e % 2) r = f(s[--e], r);
     }
-    return r;
+    return f(l,r);
   }
 };

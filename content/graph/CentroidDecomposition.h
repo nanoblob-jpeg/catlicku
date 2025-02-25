@@ -30,7 +30,7 @@ int get_c(int c, int n, int p = -1) {
 int build(vector<vi> &cent, int c = 0) {
     int cen = get_c(c, dfs_s(c)); // do something
     rem[cen] = true;
-    for (int ch: adj[centroid]) {
+    for (int ch: adj[cen]) {
         if(not rem[ch])cent[cen].push_back(build(cent, ch));
     }
     return cen;
